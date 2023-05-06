@@ -1,9 +1,10 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.PokeCombat" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/yellow_pokemon</item>
         <item name="android:statusBarColor">@color/yellow_pokemon</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
     <style name="Theme.PokeCombat" parent="Base.Theme.PokeCombat" />

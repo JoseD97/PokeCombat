@@ -45,4 +45,18 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="pokemon">Pokémon</string>
+    <string name="attack">Ataque</string>
+    <string name="hp">HP</string>
+    <string name="type">Tipo</string>
+    <string name="difficulty">Dificultad</string>
+    <string name="i_choose_you">¡Te eligo a ti!</string>
+    <string name="cancel">cancelar</string>
+    <string name="pokeball">Pokeball</string>
+    <string name="welcome">Bienvenido a</string>
+    <string name="pokecombat">POKECOMBAT</string>
+    <string name="straight_wins">Victorias seguidas</string>
+    <string name="start">COMENZAR</string>
+    <string name="pokedex">Pokedex</string>
+    <string name="choose_your_pokemon">Elije a tu pokémon!</string>
 </resources>

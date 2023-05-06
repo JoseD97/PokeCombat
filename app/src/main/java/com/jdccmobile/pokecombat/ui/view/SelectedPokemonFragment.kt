@@ -2,13 +2,18 @@ package com.jdccmobile.pokecombat.ui.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentContainerView
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.jdccmobile.pokecombat.R
 import com.jdccmobile.pokecombat.databinding.FragmentSelectedPokemonBinding
+import com.jdccmobile.pokecombat.ui.viewModel.SelectedPokemonViewModel
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -18,7 +23,7 @@ class SelectedPokemonFragment @Inject constructor() : Fragment() {
     private var _binding: FragmentSelectedPokemonBinding? = null
     private val binding get() = _binding!!
 
-//    private val selectPokemonViewModel: SelectPokemonViewModel by viewModels()
+    private val selectedPokemonViewModel: SelectedPokemonViewModel by viewModels()
 
     private var pokemonId: Int? = null
 //    private var param2: String? = null
@@ -30,8 +35,9 @@ class SelectedPokemonFragment @Inject constructor() : Fragment() {
             pokemonId = it.getInt(POKEMON_ID)
 //            param2 = it.getString(ARG_PARAM2)
         }
+        Log.i("JDJD", "pokemonid : $pokemonId")
+        if (pokemonId != null) selectedPokemonViewModel.getPokemonInfo(pokemonId!!)
 
-//        selectPokemonViewModel.initViewModel()
     }
 
     override fun onCreateView(
@@ -46,20 +52,28 @@ class SelectedPokemonFragment @Inject constructor() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        selectPokemonViewModel.pokemonInfo.observe(requireActivity(), Observer { pokemonInfo ->
-//            binding.tvSelectedPkmName.text = pokemonInfo.name
-//            binding.tvSelectedPkmAttack.text = pokemonInfo.stats[1].base_stat.toString()
-//        })
-
-//        val url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png"
-//        Picasso.get().load(url).into(binding.ivSelectedPkmImage)
+        selectedPokemonViewModel.pokemonInfo.observe(requireActivity(), Observer { pokemonInfo ->
+            binding.tvSelectedPkmName.text = pokemonInfo.name.replaceFirstChar { it.uppercase() }
+            binding.tvSelectedPkmId.text = String.format("#%03d", pokemonInfo.id)
+            binding.tvSelectedPkmAttackStats.text = pokemonInfo.stats[1].base_stat.toString()
+            binding.tvSelectedPkmHPStats.text = pokemonInfo.stats[0].base_stat.toString()
+            binding.tvSelectedPkmTypeName.text = pokemonInfo.types[0].type.name.replaceFirstChar { it.uppercase() }
+            val url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonInfo.id}.png"
+            Picasso.get().load(url).into(binding.ivSelectedPkmImage)
+            binding.tvSelectedPkmDifStat.text = getPokemonDifficulty(
+                pokemonInfo.stats[1].base_stat,
+                pokemonInfo.stats[0].base_stat
+            ).replaceFirstChar { it.uppercase() }
+        })
         initListeners()
     }
 
+
     private fun initListeners() {
-        binding.vBackground.setOnClickListener {  } // To block the background
+        binding.vBackground.setOnClickListener { } // To block the background
         binding.ivSelectPkmCancel.setOnClickListener {
-            requireActivity().findViewById<FragmentContainerView>(R.id.frSelectedPokemonContainer).visibility = View.GONE
+            requireActivity().findViewById<FragmentContainerView>(R.id.frSelectedPokemonContainer).visibility =
+                View.GONE
             parentFragmentManager.popBackStack()
         }
         binding.btSelectPkm.setOnClickListener {
@@ -70,8 +84,19 @@ class SelectedPokemonFragment @Inject constructor() : Fragment() {
         }
     }
 
+    private fun getPokemonDifficulty(attack: Int, HP: Int): String {
+        return when (attack + HP) {
+            in 0..80 -> "Muy dificil"
+            in 81..120 -> "Díficil"
+            in 121..155 -> "Normal"
+            in 156..250 -> "Fácil"
+            else -> "Muy fácil"
+        }
+    }
+
     companion object {
         const val POKEMON_ID = "pokemonId"
+
         //        private const val ARG_PARAM2 = "param2"
         fun newInstance(param1: String) =
             SelectedPokemonFragment().apply {

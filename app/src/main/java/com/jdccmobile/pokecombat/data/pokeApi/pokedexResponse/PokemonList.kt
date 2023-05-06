@@ -1,4 +1,4 @@
-package com.jdccmobile.pokecombat.data.api.response
+package com.jdccmobile.pokecombat.data.pokeApi.pokedexResponse
 
 data class PokemonList(
     val name: String,
