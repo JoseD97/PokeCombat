@@ -1,6 +1,6 @@
 package com.jdccmobile.pokecombat.di
 
-import com.jdccmobile.pokecombat.data.api.PokemonApiClient
+import com.jdccmobile.pokecombat.data.pokeApi.PokemonApiClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

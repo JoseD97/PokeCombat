@@ -3,14 +3,14 @@ package com.jdccmobile.pokecombat.ui.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.GridLayoutManager
 import com.jdccmobile.pokecombat.R
 import com.jdccmobile.pokecombat.databinding.ActivityPokedexBinding
-import com.jdccmobile.pokecombat.ui.ViewModel.PokedexViewModel
+import com.jdccmobile.pokecombat.ui.viewModel.PokedexViewModel
 import com.jdccmobile.pokecombat.ui.adapter.PokedexAdapter
+import com.jdccmobile.pokecombat.ui.view.SelectedPokemonFragment.Companion.POKEMON_ID
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -47,9 +47,11 @@ class PokedexActivity @Inject constructor() : AppCompatActivity() {
         }
     }
 
-    private fun onItemSelected(pokemonId: Int){ // todo abrir fragment al pulsar el boton // poner sobra fuera del cardview
-        Toast.makeText(this, "$pokemonId", Toast.LENGTH_SHORT).show()
+    private fun onItemSelected(pokemonId: Int){
+        // todo estoy creando otro fragment y por eso cuando le doy a atras me sale el fragment vacio en vez de irse?
+        val bundle = bundleOf(POKEMON_ID to pokemonId)
         val selectedPokemonFragment = SelectedPokemonFragment()
+        selectedPokemonFragment.arguments = bundle
         supportFragmentManager.beginTransaction()
             .add(R.id.frSelectedPokemonContainer, selectedPokemonFragment)
             .addToBackStack(null)
