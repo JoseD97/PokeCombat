@@ -16,6 +16,11 @@
         android:theme="@style/Theme.PokeCombat"
         tools:targetApi="31">
         <activity
+            android:name=".ui.view.CombatActivity"
+            android:exported="false"
+            android:label="@string/title_activity_combat"
+            android:theme="@style/Theme.PokeCombat" />
+        <activity
             android:name=".ui.view.PokedexActivity"
             android:exported="false" />
         <activity
