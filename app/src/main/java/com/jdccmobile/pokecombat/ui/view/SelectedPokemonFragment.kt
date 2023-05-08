@@ -17,6 +17,8 @@ import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+const val MY_POKEMON_ID = "MY_POKEMON_ID"
+
 @AndroidEntryPoint
 class SelectedPokemonFragment @Inject constructor() : Fragment() {
 
@@ -79,6 +81,7 @@ class SelectedPokemonFragment @Inject constructor() : Fragment() {
         binding.btSelectPkm.setOnClickListener {
 //            requireActivity().findViewById<FragmentContainerView>(R.id.frSelectedPokemonContainer).visibility = View.GONE
             val intent = Intent(requireActivity(), CombatActivity::class.java)
+            intent.putExtra(MY_POKEMON_ID, pokemonId)
             startActivity(intent)
 
         }
