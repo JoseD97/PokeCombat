@@ -11,6 +11,7 @@ import com.jdccmobile.pokecombat.domain.TurnResultModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
 class CombatViewModel @Inject constructor(
@@ -28,7 +29,7 @@ class CombatViewModel @Inject constructor(
 
     fun initViewModel(myPokemonId: Int){
         getMyPokemonInfo(myPokemonId)
-        getRivalPokemonInfo(1)
+        getRivalPokemonInfo()
     }
 
     private fun getMyPokemonInfo(myPokemonId: Int) {
@@ -40,9 +41,9 @@ class CombatViewModel @Inject constructor(
         }
     }
 
-    private fun getRivalPokemonInfo(rivalPokemonId: Int) {
+    private fun getRivalPokemonInfo() {
         viewModelScope.launch {
-            val result: PokemonInfoResult = getPokemonInfoUC(rivalPokemonId)
+            val result: PokemonInfoResult = getPokemonInfoUC(Random.nextInt(1,1011))  // 1010 available pokemons in pokeapi
             if(result != null) rivalPokemonInfo.postValue(result)
             rivalPokemonAttack = result.stats[1].base_stat.toFloat()
             rivalPokemonHP = result.stats[0].base_stat.toFloat()

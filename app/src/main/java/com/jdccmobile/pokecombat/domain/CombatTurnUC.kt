@@ -30,7 +30,10 @@ class CombatTurnUC @Inject constructor() {
     private fun userAttacks(userAttack: Float, iaHP: Float, iaMove: Int): Pair<Float, Boolean> {
         var iaNewHP = iaHP
         var iaNewDefeated = false
-        if (iaMove != 0) { // If ia does not dodge
+        if(iaMove == 0){
+            iaNewHP = iaHP - userAttack / 2
+        }
+        else if (iaMove == 1) {
             iaNewHP = iaHP - userAttack
         }
         if (iaNewHP < 0) iaNewDefeated = true
@@ -40,7 +43,10 @@ class CombatTurnUC @Inject constructor() {
     private fun iaAttacks(iaAttack: Float, userHP: Float, userMove: Int): Pair<Float, Boolean> {
         var userNewHP = userHP
         var userNewDefeated = false
-        if (userMove != 0) { // If user does not dodge
+        if(userMove == 0){
+            userNewHP = userHP - iaAttack / 2
+        }
+        else if (userMove == 1) {
             userNewHP = userHP - iaAttack
         }
         if (userNewHP < 0) userNewDefeated = true

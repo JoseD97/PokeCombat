@@ -225,25 +225,34 @@
         app:layout_constraintStart_toEndOf="@id/vRivalHP4"
         app:layout_constraintTop_toBottomOf="@id/tvMyPokemonName" />
 
-    <TextView
-        android:id="@+id/tvMyMove"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/llInfoMoves"
+        android:padding="16dp"
+        android:background="@drawable/bg_info_moves"
+        android:layout_width="270dp"
+        android:gravity="center"
         android:layout_marginTop="64dp"
-        android:text="Pikachu atacó! Le quitaste 5HP"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvRivalHP" />
+        app:layout_constraintTop_toBottomOf="@id/tvRivalHP"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tvRivalMove"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Charmander atacó! Te quito 5 HP"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvMyMove" />
+        <TextView
+            android:id="@+id/tvMyMove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pikachu atacó! Le ste 5HP"
+            />
+
+        <TextView
+            android:id="@+id/tvRivalMove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Charmander atacó! Te quito 5 HP" />
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/ivDodge"
@@ -256,7 +265,7 @@
         app:layout_constraintEnd_toStartOf="@+id/ivAttack"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvRivalMove" />
+        app:layout_constraintTop_toBottomOf="@id/llInfoMoves" />
 
     <ImageView
         android:id="@+id/ivAttack"
@@ -269,7 +278,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ivDodge"
-        app:layout_constraintTop_toBottomOf="@id/tvRivalMove" />
+        app:layout_constraintTop_toBottomOf="@id/llInfoMoves" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
