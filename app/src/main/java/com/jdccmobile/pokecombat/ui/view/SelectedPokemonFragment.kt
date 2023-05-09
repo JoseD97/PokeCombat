@@ -74,8 +74,7 @@ class SelectedPokemonFragment @Inject constructor() : Fragment() {
     private fun initListeners() {
         binding.vBackground.setOnClickListener { } // To block the background
         binding.ivSelectPkmCancel.setOnClickListener {
-            requireActivity().findViewById<FragmentContainerView>(R.id.frSelectedPokemonContainer).visibility =
-                View.GONE
+            requireActivity().findViewById<FragmentContainerView>(R.id.frSelectedPokemonContainer).visibility = View.GONE
             parentFragmentManager.popBackStack()
         }
         binding.btSelectPkm.setOnClickListener {
@@ -83,7 +82,8 @@ class SelectedPokemonFragment @Inject constructor() : Fragment() {
             val intent = Intent(requireActivity(), CombatActivity::class.java)
             intent.putExtra(MY_POKEMON_ID, pokemonId)
             startActivity(intent)
-
+            requireActivity().findViewById<FragmentContainerView>(R.id.frSelectedPokemonContainer).visibility = View.GONE
+            parentFragmentManager.popBackStack()
         }
     }
 
