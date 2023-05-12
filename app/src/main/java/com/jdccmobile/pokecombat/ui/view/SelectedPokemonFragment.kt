@@ -51,7 +51,7 @@ class SelectedPokemonFragment @Inject constructor() : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) { // cuando este todo  cargado
         super.onViewCreated(view, savedInstanceState)
 
         selectedPokemonViewModel.pokemonInfo.observe(requireActivity(), Observer { pokemonInfo ->

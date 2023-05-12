@@ -27,6 +27,8 @@ class CombatViewModel @Inject constructor(
     private var rivalPokemonAttack = 0f
     private var rivalPokemonHP = 0f
 
+    private var victoriesCount = 0
+
     fun initViewModel(myPokemonId: Int){
         getMyPokemonInfo(myPokemonId)
         getRivalPokemonInfo()
@@ -56,6 +58,13 @@ class CombatViewModel @Inject constructor(
         rivalPokemonHP = result.iaHP
         return result
     }
+
+    fun updateVictoriesCount(add : Int){
+        if(add == 1) victoriesCount++
+        else victoriesCount = 0
+    }
+
+    fun getVictoriesCount() : Int = victoriesCount
 
 
 }
