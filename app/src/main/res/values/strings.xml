@@ -19,4 +19,12 @@
     <string name="combat">Combate</string>
     <string name="defeat_your_rival">¡Derrota a tu rival!</string>
     <string name="dodge">Esquivar</string>
+    <string name="choose_move">Elige un movimiento</string>
+    <string name="turn_start">Comienza la ronda </string>
+    <string name="attacked">atacó! </string>
+    <string name="dodged">esquivó! </string>
+    <string name="rival_lives_left">Le quedan </string>
+    <string name="user_lives_left">Te quedan </string>
+    <string name="win">VICTORIA</string>
+    <string name="defeat">DERROTA</string>
 </resources>
