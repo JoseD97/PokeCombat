@@ -1,47 +1,60 @@
 package com.jdccmobile.pokecombat.domain
 
+import android.util.Log
 import javax.inject.Inject
 
 class CombatTurnUC @Inject constructor() {
 
     operator fun invoke(
-        userAttack: Float, userHP: Float, userMove: Int,
-        iaAttack: Float, iaHP: Float, iaMove: Int
+        userAttack: Float, userHP: Float, userMove: Int, isMyAttackLoaded: Boolean,
+        iaAttack: Float, iaHP: Float, iaMove: Int, isRivalAttackLoaded: Boolean
     ): TurnResultModel {
         var userNewHP = userHP
         var iaNewHP = iaHP
+        var isNewMyAttackLoaded = isMyAttackLoaded
+        var isNewRivalAttackLoaded = isRivalAttackLoaded
         var iaDefeated = false
         var userDefeated = false
 
-        if (userMove == 1 && !userDefeated) {
-            val turnUserResult = userAttacks(userAttack / 10, iaHP, iaMove)
+        if (userMove == 1) {
+            val turnUserResult : Pair<Float, Boolean>
+            if(isMyAttackLoaded){
+                turnUserResult = userAttacks(userAttack / 5, iaHP, iaMove)
+                isNewMyAttackLoaded = false
+            } else {
+                turnUserResult = userAttacks(userAttack / 10, iaHP, iaMove)
+            }
             iaNewHP = turnUserResult.first
             iaDefeated = turnUserResult.second
-
         }
+        else if(userMove == 2) { isNewMyAttackLoaded = true }
 
         if (iaMove == 1 && !iaDefeated) {
-            val turnIaResult = iaAttacks(iaAttack / 10, userHP, userMove)
+            val turnIaResult : Pair<Float, Boolean>
+            if(isRivalAttackLoaded){
+                turnIaResult = iaAttacks(iaAttack / 5, userHP, userMove)
+                isNewRivalAttackLoaded = false
+            } else {
+                turnIaResult = iaAttacks(iaAttack / 10, userHP, userMove)
+            }
             userNewHP = turnIaResult.first
             userDefeated = turnIaResult.second
         }
+        else if(iaMove == 2 && !iaDefeated) { isNewRivalAttackLoaded = true }
 
-        return TurnResultModel(userNewHP, userDefeated, iaNewHP, iaDefeated)
+        Log.i("JDJD", "isNewMyAttackLoaded $isNewMyAttackLoaded")
+        Log.i("JDJD", "isNewRivalAttackLoaded $isNewRivalAttackLoaded")
+
+        return TurnResultModel(userNewHP, userDefeated, isNewMyAttackLoaded, iaNewHP, iaDefeated, isNewRivalAttackLoaded)
     }
 
     private fun userAttacks(userAttack: Float, iaHP: Float, iaMove: Int): Pair<Float, Boolean> {
-        var iaNewHP = iaHP
+        var iaNewHP: Float
         var iaNewDefeated = false
-        when (iaMove) {
-            0 -> {
-                iaNewHP = iaHP - userAttack / 2
-            }
-            1 -> {
-                iaNewHP = iaHP - userAttack
-            }
-            else -> {
-                //todo super ataque
-            }
+        Log.i("JDJD", "userAttack $userAttack")
+        iaNewHP = when (iaMove) {
+            0 -> iaHP - userAttack / 2
+            else -> iaHP - userAttack
         }
         if (iaNewHP < 1f) {
             iaNewHP = 0f
@@ -51,18 +64,12 @@ class CombatTurnUC @Inject constructor() {
     }
 
     private fun iaAttacks(iaAttack: Float, userHP: Float, userMove: Int): Pair<Float, Boolean> {
-        var userNewHP = userHP
+        var userNewHP: Float
         var userNewDefeated = false
-        when (userMove) {
-            0 -> {
-                userNewHP = userHP - iaAttack / 2
-            }
-            1 -> {
-                userNewHP = userHP - iaAttack
-            }
-            else -> {
-                //todo super ataque
-            }
+        Log.i("JDJD", "iaAttack $iaAttack")
+        userNewHP = when (userMove) {
+            0 -> userHP - iaAttack /  2
+            else -> userHP - iaAttack
         }
         if (userNewHP < 1f) {
             userNewHP = 0f

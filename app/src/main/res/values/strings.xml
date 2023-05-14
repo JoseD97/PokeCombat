@@ -27,4 +27,10 @@
     <string name="user_lives_left">Te quedan </string>
     <string name="win">VICTORIA</string>
     <string name="defeat">DERROTA</string>
+    <string name="info_instructions">Derrota a tu enemigo reduciendo sus HP a cero</string>
+    <string name="info_attack">Ataca a tu rival para infligirle daño. El daño de cada ataque es el ataque del pokemon entre 10</string>
+    <string name="info_defend">Protégete de los ataques de tu rival. El daño que te hará será la mitad</string>
+    <string name="info_superattack">Carga un super ataque para hacer un ataque crítico a tu rival. Este ataque hará el doble de daño</string>
+    <string name="ok">OK</string>
+    <string name="super_attack">Super ataque</string>
 </resources>

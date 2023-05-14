@@ -46,7 +46,6 @@ class CombatActivity @Inject constructor() : AppCompatActivity() {
         createCombatInfoDialog()
         initMyPokemonInfo()
         initRivalPokemonInfo()
-
     }
 
     private fun createCombatInfoDialog() {
@@ -90,24 +89,28 @@ class CombatActivity @Inject constructor() : AppCompatActivity() {
             // Moves -> 2 superattack, 1 attack, 0 dodge
             val iaMove = Random.nextInt(3)
             val result = combatViewModel.getTurnResult(1, iaMove)
-            newTurn(result, iaMove)
+            combatViewModel.updateAttacksLoaded(result.isUserAttackLoaded, result.isIaAttackLoaded)
+            if (!result.isUserAttackLoaded) binding.ivSuperAttackCharged.visibility = View.GONE
+            newTurn(result, 1, iaMove)
         }
 
         binding.ivDodge.setOnClickListener {
             val iaMove = Random.nextInt(3)
             val result = combatViewModel.getTurnResult(0, iaMove)
-            newTurn(result, iaMove)
+            combatViewModel.updateAttacksLoaded(result.isUserAttackLoaded, result.isIaAttackLoaded)
+            newTurn(result, 0, iaMove)
         }
 
         binding.ivSuperAttack.setOnClickListener {
-            binding.ivSuperAttackCharged.visibility = View.VISIBLE
             val iaMove = Random.nextInt(3)
             val result = combatViewModel.getTurnResult(2, iaMove)
-            newTurn(result, iaMove)
+            combatViewModel.updateAttacksLoaded(result.isUserAttackLoaded, result.isIaAttackLoaded)
+            if (result.isUserAttackLoaded) binding.ivSuperAttackCharged.visibility = View.VISIBLE
+            newTurn(result, 2, iaMove)
         }
     }
 
-    private fun newTurn(result: TurnResultModel, iaMove: Int) {
+    private fun newTurn(result: TurnResultModel, userMove: Int, iaMove: Int) {
         if (result.iaIsDefeated) {
             combatViewModel.updateVictoriesCount(1)
             binding.ivRivalPokemon.animate().alpha(0f).duration = 1000
@@ -117,10 +120,31 @@ class CombatActivity @Inject constructor() : AppCompatActivity() {
             createEndDialog(true)
             combatViewModel.updateVictoriesCount(0)
         } else {
-            updateDataCombat(result, 0, iaMove)
+            updateDataCombat(result, userMove, iaMove)
             updateHealthBar(result.userHP, result.iaHP)
         }
     }
+
+    private fun updateDataCombat(result: TurnResultModel, userMove: Int, iaMove: Int) {
+        var userMoveDescription = ""
+        if (userMove == 0) userMoveDescription = getString(R.string.dodged)
+        if (userMove == 1) userMoveDescription = getString(R.string.attacked)
+        if(userMove == 2) userMoveDescription = "CARGO"
+        val userPokemonName = binding.tvMyPokemonName.text
+
+        var iaMoveDescription =
+            if (iaMove == 1) getString(R.string.attacked) else getString(R.string.dodged)
+        if(iaMove == 2) iaMoveDescription = "CARGO"
+        val iaPokemonName = binding.tvRivalPokemonName.text
+
+        val userMoveText = "$userPokemonName $userMoveDescription ${getString(R.string.rival_lives_left)} " +
+                 "${result.iaHP.toInt()} ${getString(R.string.hp)}"
+        binding.tvMyMove.text = userMoveText
+        val iaMoveText = "$iaPokemonName $iaMoveDescription ${getString(R.string.user_lives_left)} " +
+                "${result.userHP.toInt()} ${getString(R.string.hp)}"
+        binding.tvRivalMove.text = iaMoveText
+    }
+
 
     private fun createEndDialog(userDefeated: Boolean) {
         val dialogEndBuilder = AlertDialog.Builder(this)
@@ -131,12 +155,13 @@ class CombatActivity @Inject constructor() : AppCompatActivity() {
         dialogEnd.setCanceledOnTouchOutside(false)
         val bindingDialog = DialogCombatEndBinding.bind(dialogView)
 
-        var victoriesCount = combatViewModel.getVictoriesCount()
+        val victoriesCount = combatViewModel.getVictoriesCount()
 
-        // Design if user loses, design user wins in the default
+        // Default design if user wins
+        // Design if user loses:
         if (userDefeated) {
             val redColor = ContextCompat.getColor(this, R.color.red)
-            bindingDialog.tvCombatEndTitle.text = getString(R.string.win)
+            bindingDialog.tvCombatEndTitle.text = getString(R.string.defeat)
             bindingDialog.tvCombatEndTitle.setTextColor(redColor)
             bindingDialog.tvCombatEndVictories.setTextColor(redColor)
             bindingDialog.btEndDialog.text = getString(R.string.defeat)
@@ -164,22 +189,6 @@ class CombatActivity @Inject constructor() : AppCompatActivity() {
         dialogEnd.show()
     }
 
-    private fun updateDataCombat(result: TurnResultModel, userMove: Int, iaMove: Int) {
-        val userMoveDescription =
-            if (userMove == 1) getString(R.string.attacked) else getString(R.string.dodged)
-        val userPokemonName = binding.tvMyPokemonName.text
-
-        val iaMoveDescription =
-            if (iaMove == 1) getString(R.string.attacked) else getString(R.string.dodged)
-        val iaPokemonName = binding.tvRivalPokemonName.text
-
-        val userMoveText = "$userPokemonName $userMoveDescription ${getString(R.string.user_lives_left)} " +
-                 "${result.iaHP.toInt()} + ${getString(R.string.hp)}"
-        binding.tvMyMove.text = userMoveText
-        val iaMoveText = "$iaPokemonName $iaMoveDescription ${getString(R.string.rival_lives_left)} " +
-                "${result.userHP.toInt()} ${getString(R.string.hp)}"
-        binding.tvRivalMove.text = iaMoveText
-    }
 
     private fun updateHealthBar(userHP: Float, iaHp: Float) {
         updateUserHealthBar(userHP)
