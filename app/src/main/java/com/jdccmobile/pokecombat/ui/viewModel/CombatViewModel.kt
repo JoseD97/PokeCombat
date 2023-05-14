@@ -1,6 +1,5 @@
 package com.jdccmobile.pokecombat.ui.viewModel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -29,7 +28,10 @@ class CombatViewModel @Inject constructor(
 
     private var victoriesCount = 0
 
-    fun initViewModel(myPokemonId: Int){
+    private var isMySuperAttackLoaded = false
+    private var isRivalSuperAttackLoaded = false
+
+    fun initViewModel(myPokemonId: Int) {
         getMyPokemonInfo(myPokemonId)
         getRivalPokemonInfo()
     }
@@ -37,7 +39,7 @@ class CombatViewModel @Inject constructor(
     private fun getMyPokemonInfo(myPokemonId: Int) {
         viewModelScope.launch {
             val result: PokemonInfoResult = getPokemonInfoUC(myPokemonId)
-            if(result != null) myPokemonInfo.postValue(result)
+            if (result != null) myPokemonInfo.postValue(result)
             myPokemonAttack = result.stats[1].base_stat.toFloat()
             myPokemonHP = result.stats[0].base_stat.toFloat()
         }
@@ -45,26 +47,43 @@ class CombatViewModel @Inject constructor(
 
     private fun getRivalPokemonInfo() {
         viewModelScope.launch {
-            val result: PokemonInfoResult = getPokemonInfoUC(Random.nextInt(1,1011))  // 1010 available pokemons in pokeapi
-            if(result != null) rivalPokemonInfo.postValue(result)
+            val result: PokemonInfoResult =
+                getPokemonInfoUC(Random.nextInt(1, 1011))  // 1010 available pokemons in pokeapi
+            if (result != null) rivalPokemonInfo.postValue(result)
             rivalPokemonAttack = result.stats[1].base_stat.toFloat()
             rivalPokemonHP = result.stats[0].base_stat.toFloat()
         }
     }
 
-    fun getTurnResult(myMove: Int, rivalMove: Int) : TurnResultModel{
-        val result = combatTurnUC(myPokemonAttack, myPokemonHP, myMove, rivalPokemonAttack, rivalPokemonHP, rivalMove)
+    fun getTurnResult(myMove: Int, rivalMove: Int): TurnResultModel {
+        val result =
+            if(myMove == 2) {
+                combatTurnUC(
+                    myPokemonAttack, myPokemonHP, myMove, true,
+                    rivalPokemonAttack, rivalPokemonHP, rivalMove, isRivalSuperAttackLoaded
+                )
+            } else {
+            combatTurnUC(
+                myPokemonAttack, myPokemonHP, myMove, isMySuperAttackLoaded,
+                rivalPokemonAttack, rivalPokemonHP, rivalMove, isRivalSuperAttackLoaded
+            )
+        }
         myPokemonHP = result.userHP
         rivalPokemonHP = result.iaHP
         return result
     }
 
-    fun updateVictoriesCount(add : Int){
-        if(add == 1) victoriesCount++
+    fun updateAttacksLoaded(isMyAttackLoaded: Boolean, isRivalAttackLoaded: Boolean) {
+        isMySuperAttackLoaded = isMyAttackLoaded
+        isRivalSuperAttackLoaded = isRivalAttackLoaded
+    }
+
+    fun updateVictoriesCount(add: Int) {
+        if (add == 1) victoriesCount++
         else victoriesCount = 0
     }
 
-    fun getVictoriesCount() : Int = victoriesCount
+    fun getVictoriesCount(): Int = victoriesCount
 
 
 }

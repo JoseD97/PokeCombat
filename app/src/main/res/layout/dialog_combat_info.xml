@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_black"
-        android:text="Derrota a tu enemigo reduciendo sus HP a cero"
+        android:text="@string/info_instructions"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,14 +23,15 @@
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_attack"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDialogInfo" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDialogInfo"
+        android:contentDescription="@string/attack" />
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/roboto_black"
-        android:text="Ataca a tu rival para infligirle daño. El daño de cada ataque es el ataque del pokemon entre 10"
+        android:text="@string/info_attack"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/ivAttackInfo"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,14 +45,15 @@
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_shield"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivAttackInfo" />
+        app:layout_constraintTop_toBottomOf="@+id/ivAttackInfo"
+        android:contentDescription="@string/dodge" />
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/roboto_black"
-        android:text="Protégete de los ataques de tu rival. El daño que te hará será la mitad"
+        android:text="@string/info_defend"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/ivDodgeInfo"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,16 +66,17 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="8dp"
-        android:src="@drawable/ic_attack"
+        android:src="@drawable/ic_fire"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivDodgeInfo" />
+        app:layout_constraintTop_toBottomOf="@+id/ivDodgeInfo"
+        android:contentDescription="@string/super_attack" />
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/roboto_black"
-        android:text="Carga un super ataque para hacer un ataque crítico a tu rival. Este ataque hará el doble de daño"
+        android:text="@string/info_superattack"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/ivSuperAttackInfo"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +88,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="OK"
+        android:text="@string/ok"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
