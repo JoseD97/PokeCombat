@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jdccmobile.pokecombat.R
-import com.jdccmobile.pokecombat.data.pokeApi.pokedexResponse.PokemonList
+import com.jdccmobile.pokecombat.data.api.response.PokemonList
 import com.jdccmobile.pokecombat.databinding.ItemPokemonBinding
 import com.squareup.picasso.Picasso
 
-class PokedexAdapter(private val pokemon: List<PokemonList>, private val onClickListener: (Int) -> Unit) : RecyclerView.Adapter<PokedexAdapter.PokemonViewHolder>() {
+class PokedexAdapter(private val pokemon: List<PokemonList>) : RecyclerView.Adapter<PokedexAdapter.PokemonViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -21,7 +21,7 @@ class PokedexAdapter(private val pokemon: List<PokemonList>, private val onClick
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
         val item = pokemon[position]
-        holder.render(position, item, onClickListener)
+        holder.render(position, item)
     }
 
     // ViewHolder
@@ -29,15 +29,15 @@ class PokedexAdapter(private val pokemon: List<PokemonList>, private val onClick
 
         private val binding = ItemPokemonBinding.bind(view)
 
-        fun render(position: Int, pokemon: PokemonList, onClickListener: (Int) -> Unit){ // se llama automaticamente por cada item
+        fun render(position: Int, pokemon: PokemonList){ // se llama automaticamente por cada item
             binding.tvPkmName.text = pokemon.name.replaceFirstChar { it.uppercase() }
             binding.tvPkmId.text = String.format("#%03d", position + 1)
-            val url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${position + 1}.png"
+            var url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${position + 1}.png"
             Picasso.get().load(url).into(binding.ivPkmImage)
 
             itemView.setOnClickListener{
                 Log.i("TAG", "pulsado")
-                onClickListener(position + 1)
+//                onClickListener(position + 1)
             }
         }
     }

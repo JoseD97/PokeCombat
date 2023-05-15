@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:fontFamily="@font/roboto_black"
-        android:text="@string/pokedex"
+        android:text="Pokedex"
         android:textColor="@color/yellow_pokemon"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -26,7 +26,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:text="@string/choose_your_pokemon"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Elije a tu pokémon!"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPokedex" />
@@ -40,8 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/pokeball" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPokemon"
@@ -56,18 +56,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPokedexInfo"
         app:layout_constraintVertical_bias="0.0" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:visibility="gone"
-        android:id="@+id/frSelectedPokemonContainer"
-        android:name="com.jdccmobile.pokecombat.ui.view.SelectedPokemonFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout="@layout/fragment_selected_pokemon" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

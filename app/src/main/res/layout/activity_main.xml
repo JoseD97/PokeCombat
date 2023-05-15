@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="64dp"
-        android:text="@string/welcome"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Bienvenido a "
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +26,7 @@
         android:layout_marginStart="36dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_black"
-        android:text="@string/pokecombat"
+        android:text="POKECOMBAT"
         android:textColor="@color/yellow_pokemon"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -39,15 +40,15 @@
         app:layout_constraintBottom_toTopOf="@id/tvScoreInfo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
-        android:contentDescription="@string/pokeball" />
+        app:layout_constraintTop_toBottomOf="@id/tvSubtitle" />
 
     <TextView
         android:id="@+id/tvScoreInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="@string/straight_wins"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Victorias seguidas"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/tvScore"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,8 +60,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/roboto_black"
-        tools:text="0"
-        android:textColor="@color/yellow_pokemon"
+        android:text="0"
+        android:textColor="@color/blue_pokemon"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@id/btStart"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="36dp"
         android:layout_marginBottom="64dp"
-        android:text="@string/start"
+        android:text="COMENZAR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
