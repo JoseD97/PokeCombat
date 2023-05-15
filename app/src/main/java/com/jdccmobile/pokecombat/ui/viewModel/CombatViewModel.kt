@@ -1,11 +1,15 @@
 package com.jdccmobile.pokecombat.ui.viewModel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jdccmobile.pokecombat.data.pokeApi.pokemonInfoResponse.PokemonInfoResult
+import com.jdccmobile.pokecombat.data.preferences.VICTORIES
 import com.jdccmobile.pokecombat.domain.CombatTurnUC
 import com.jdccmobile.pokecombat.domain.GetPokemonInfoUC
+import com.jdccmobile.pokecombat.domain.GetVictoriesCountUC
+import com.jdccmobile.pokecombat.domain.PutVictoriesCountUC
 import com.jdccmobile.pokecombat.domain.TurnResultModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,11 +19,14 @@ import kotlin.random.Random
 @HiltViewModel
 class CombatViewModel @Inject constructor(
     private val getPokemonInfoUC: GetPokemonInfoUC,
-    private val combatTurnUC: CombatTurnUC
+    private val combatTurnUC: CombatTurnUC,
+    private val putVictoriesCountUC: PutVictoriesCountUC,
+    private val getVictoriesCountUC: GetVictoriesCountUC
 ) : ViewModel() {
 
     val myPokemonInfo = MutableLiveData<PokemonInfoResult>()
     val rivalPokemonInfo = MutableLiveData<PokemonInfoResult>()
+    val victoriesCountDataStore = MutableLiveData<Int?>()
 
     private var myPokemonAttack = 0f
     private var myPokemonHP = 0f
@@ -84,6 +91,20 @@ class CombatViewModel @Inject constructor(
     }
 
     fun getVictoriesCount(): Int = victoriesCount
+
+    fun putVictoriesCountDataStore(value: Int) {
+        viewModelScope.launch {
+            putVictoriesCountUC(VICTORIES, value)
+        }
+    }
+
+    fun getVictoriesCountDataStore(){
+        viewModelScope.launch {
+            val victories = getVictoriesCountUC(VICTORIES)
+            Log.i("JDJD", "victories VM $victories")
+            victoriesCountDataStore.postValue(victories)
+        }
+    }
 
 
 }

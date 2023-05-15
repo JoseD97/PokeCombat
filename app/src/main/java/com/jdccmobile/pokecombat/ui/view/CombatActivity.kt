@@ -2,6 +2,7 @@ package com.jdccmobile.pokecombat.ui.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -30,6 +31,7 @@ class CombatActivity @Inject constructor() : AppCompatActivity() {
     private var rivalPokemonHp = 0f
     private var myPokemonName = ""
     private var rivalPokemonName = ""
+    private var victoriesCountDataStore = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,14 +40,26 @@ class CombatActivity @Inject constructor() : AppCompatActivity() {
 
         myPokemonId = intent.getIntExtra(MY_POKEMON_ID, 1)
         combatViewModel.initViewModel(myPokemonId)
-        initUi()
+        initUI()
         initListeners()
     }
 
-    private fun initUi() {
+    private fun initUI() {
         createCombatInfoDialog()
         initMyPokemonInfo()
         initRivalPokemonInfo()
+        getMaxVictories()
+
+
+    }
+
+    private fun getMaxVictories() {
+        combatViewModel.getVictoriesCountDataStore()
+        combatViewModel.victoriesCountDataStore.observe(this){ victories ->
+            if(victories != null) victoriesCountDataStore = victories
+            else victoriesCountDataStore = 99
+            Log.i("TAG", "victoriesCountDataStore $victoriesCountDataStore")
+        }
     }
 
     private fun createCombatInfoDialog() {
@@ -156,7 +170,6 @@ class CombatActivity @Inject constructor() : AppCompatActivity() {
         val bindingDialog = DialogCombatEndBinding.bind(dialogView)
 
         val victoriesCount = combatViewModel.getVictoriesCount()
-
         // Default design if user wins
         // Design if user loses:
         if (userDefeated) {
@@ -171,7 +184,9 @@ class CombatActivity @Inject constructor() : AppCompatActivity() {
 
         bindingDialog.btEndDialog.setOnClickListener {
             if (userDefeated) {
-                // todo guardar en el shared preferences el record de victorias seguidas
+                Log.i("JDJD", "victoriesCountDataStore $victoriesCountDataStore")
+                Log.i("JDJD", "victoriesCount $victoriesCount")
+                if(victoriesCount > victoriesCountDataStore) combatViewModel.putVictoriesCountDataStore(victoriesCount)
                 val intent = Intent(this, PokedexActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -180,7 +195,7 @@ class CombatActivity @Inject constructor() : AppCompatActivity() {
                 initMyPokemonInfo()
                 initRivalPokemonInfo()
                 resetHP()
-                val moveText = getString(R.string.turn_start) + victoriesCount
+                val moveText = getString(R.string.turn_start) + " " + victoriesCount
                 binding.tvMyMove.text = moveText
                 binding.tvRivalMove.text = ""
                 dialogEnd.dismiss()
