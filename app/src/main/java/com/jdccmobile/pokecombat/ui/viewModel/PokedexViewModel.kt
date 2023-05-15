@@ -1,10 +1,10 @@
-package com.jdccmobile.pokecombat.ui.ViewModel
+package com.jdccmobile.pokecombat.ui.viewModel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jdccmobile.pokecombat.data.api.response.PokemonList
+import com.jdccmobile.pokecombat.data.pokeApi.pokedexResponse.PokemonList
 import com.jdccmobile.pokecombat.domain.GetAllPokemonsUC
 
 import dagger.hilt.android.lifecycle.HiltViewModel
