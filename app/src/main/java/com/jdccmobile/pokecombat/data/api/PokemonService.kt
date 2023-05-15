@@ -1,8 +1,7 @@
-package com.jdccmobile.pokecombat.data.pokeApi
+package com.jdccmobile.pokecombat.data.api
 
 import android.util.Log
-import com.jdccmobile.pokecombat.data.pokeApi.pokedexResponse.PokemonList
-import com.jdccmobile.pokecombat.data.pokeApi.pokemonInfoResponse.PokemonInfoResult
+import com.jdccmobile.pokecombat.data.api.response.PokemonList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -20,12 +19,16 @@ class PokemonService @Inject constructor(
         }
     }
 
-    suspend fun getPokemonInfo(pokemonId : Int): PokemonInfoResult {
-        return withContext(Dispatchers.IO) {
-            val response = apiClient.getPokemonInfo(pokemonId)
-            val body = response.body()
-            Log.d("JDJD", " BODY $body")
-            body ?: PokemonInfoResult("Error de conexion", 0, emptyList(), emptyList())
-        }
-    }
+//    suspend fun getPokemonInfo(): PokemonInfoResponse {
+//        return withContext(Dispatchers.IO) {
+//            val response = apiClient.getPokemonInfo()
+//            val body = response.body()
+//            Log.d("JDJD", " BODY $body")
+//            PokemonInfoResponse(
+//                body?.name ?: "Error de conexion",
+//                body?.stats ?: emptyList()
+//            )
+//
+//        }
+//    }
 }
