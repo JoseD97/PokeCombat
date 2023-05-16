@@ -1,38 +1,54 @@
 package com.jdccmobile.pokecombat.data.preferences
 
 import android.content.Context
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.first
 import java.lang.Exception
 import javax.inject.Inject
 
 private const val PREFERENCES_NAME = "preferences"
-const val VICTORIES = "victories"
 
 private val Context.dataStore by preferencesDataStore(name = PREFERENCES_NAME)
 
-class PreferencesImp @Inject constructor(
+ class PreferencesImp @Inject constructor(
     private val context: Context
-) : Preferences {
+) : PreferencesDataStore {
 
-    override suspend fun putVictoriesCount(key: String, value: Int){
-        val preferenceKey = intPreferencesKey(key)
+    override suspend fun putInt(key:  Preferences.Key<Int>, value: Int){
         context.dataStore.edit { preferences ->
-            preferences[preferenceKey] = value
+            preferences[key] = value
         }
     }
 
-    override suspend fun getVictoriesCount(key: String) : Int? {
+    override suspend fun getInt(key: Preferences.Key<Int>) : Int? {
         return try {
-            val preferenceKey = intPreferencesKey(key)
             val preferences = context.dataStore.data.first()
-            preferences[preferenceKey]
+            preferences[key]
         } catch (e: Exception){
             e.printStackTrace()
             null
         }
     }
 
-}
+
+     override suspend fun putBoolean(key: Preferences.Key<Boolean>, value: Boolean) {
+         context.dataStore.edit { preferences ->
+             preferences[key] = value
+         }
+     }
+
+     override suspend fun getBoolean(key: Preferences.Key<Boolean>): Boolean? {
+         return try {
+             val preferences = context.dataStore.data.first()
+             preferences[key]
+         } catch (e: Exception){
+             e.printStackTrace()
+             null
+         }
+     }
+
+
+
+ }

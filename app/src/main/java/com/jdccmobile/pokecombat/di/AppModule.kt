@@ -2,7 +2,7 @@ package com.jdccmobile.pokecombat.di
 
 import android.content.Context
 import com.jdccmobile.pokecombat.data.pokeApi.PokemonApiClient
-import com.jdccmobile.pokecombat.data.preferences.Preferences
+import com.jdccmobile.pokecombat.data.preferences.PreferencesDataStore
 import com.jdccmobile.pokecombat.data.preferences.PreferencesImp
 import dagger.Module
 import dagger.Provides
@@ -22,7 +22,7 @@ class AppModule {
     @Provides
     fun provideDataStore(
         @ApplicationContext app: Context
-    ): Preferences = PreferencesImp(app)
+    ): PreferencesDataStore = PreferencesImp(app)
 
     // Retrofit
     @Singleton

@@ -1,14 +1,15 @@
 package com.jdccmobile.pokecombat.data
 
+import androidx.datastore.preferences.core.Preferences
 import com.jdccmobile.pokecombat.data.pokeApi.PokemonService
 import com.jdccmobile.pokecombat.data.pokeApi.pokedexResponse.PokemonList
 import com.jdccmobile.pokecombat.data.pokeApi.pokemonInfoResponse.PokemonInfoResult
-import com.jdccmobile.pokecombat.data.preferences.Preferences
+import com.jdccmobile.pokecombat.data.preferences.PreferencesDataStore
 import javax.inject.Inject
 
 class PokemonRepository @Inject constructor(
     private val pokemonService: PokemonService,
-    private val preferences: Preferences // todo probar con el imp
+    private val preferences: PreferencesDataStore
 ) {
 
     // PokeApi
@@ -21,13 +22,23 @@ class PokemonRepository @Inject constructor(
     }
 
     // DataStore
-    suspend fun putVictoriesCount(key: String, value: Int){
-        preferences.putVictoriesCount(key, value)
+    suspend fun putVictoriesCount(key: Preferences.Key<Int>, value: Int){
+        preferences.putInt(key, value)
     }
 
-    suspend fun getVictoriesCount(key: String) : Int? {
-        return preferences.getVictoriesCount(key)
+    suspend fun getVictoriesCount(key: Preferences.Key<Int>) : Int? {
+        return preferences.getInt(key)
     }
+
+    suspend fun putIsInfoCombatShowed(key: Preferences.Key<Boolean>, value: Boolean){
+        preferences.putBoolean(key, value)
+    }
+
+    suspend fun getIsInfoCombatShowed(key: Preferences.Key<Boolean>) : Boolean? {
+        return preferences.getBoolean(key)
+    }
+
+
 
 
 }

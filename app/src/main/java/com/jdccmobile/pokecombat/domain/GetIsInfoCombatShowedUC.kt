@@ -4,11 +4,8 @@ import androidx.datastore.preferences.core.Preferences
 import com.jdccmobile.pokecombat.data.PokemonRepository
 import javax.inject.Inject
 
-class PutVictoriesCountUC @Inject constructor(
+class GetIsInfoCombatShowedUC @Inject constructor(
     private val pokemonRepository: PokemonRepository
 ) {
-    suspend operator fun invoke(key: Preferences.Key<Int>, value: Int){
-        pokemonRepository.putVictoriesCount(key, value)
-    }
-
+    suspend operator fun invoke(key: Preferences.Key<Boolean>) = pokemonRepository.getIsInfoCombatShowed(key)
 }
