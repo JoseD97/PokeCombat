@@ -143,6 +143,7 @@
         android:layout_width="125dp"
         android:layout_height="125dp"
         android:layout_marginTop="64dp"
+        android:src="@drawable/im_pokeball"
         android:contentDescription="@string/combat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

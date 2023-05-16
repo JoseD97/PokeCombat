@@ -45,6 +45,8 @@ class CombatActivity @Inject constructor() : AppCompatActivity() {
     }
 
     private fun initUI() {
+
+        combatViewModel.getIsInfoCombatShowed()
         createCombatInfoDialog()
         initMyPokemonInfo()
         initRivalPokemonInfo()
@@ -58,20 +60,27 @@ class CombatActivity @Inject constructor() : AppCompatActivity() {
         combatViewModel.victoriesCountDataStore.observe(this){ victories ->
             if(victories != null) victoriesCountDataStore = victories
             else victoriesCountDataStore = 99
-            Log.i("TAG", "victoriesCountDataStore $victoriesCountDataStore")
+            Log.i("JDJD", "victoriesCountDataStore $victoriesCountDataStore")
         }
     }
 
     private fun createCombatInfoDialog() {
-        val dialogBuilder = AlertDialog.Builder(this)
-        val inflater = this.layoutInflater
-        val dialogView = inflater.inflate(R.layout.dialog_combat_info, null)
-        dialogBuilder.setView(dialogView)
-        val dialog = dialogBuilder.create()
-        val binding = DialogCombatInfoBinding.bind(dialogView)
-        binding.btOkInfo.setOnClickListener { dialog.dismiss() }
-        dialog.show()
-
+        var wasDialogShowed : Boolean?
+        combatViewModel.isInfoCombatShowed.observe(this){ wasDialogShowed = it
+            if(!wasDialogShowed!!){
+                val dialogBuilder = AlertDialog.Builder(this)
+                val inflater = this.layoutInflater
+                val dialogView = inflater.inflate(R.layout.dialog_combat_info, null)
+                dialogBuilder.setView(dialogView)
+                val dialog = dialogBuilder.create()
+                val binding = DialogCombatInfoBinding.bind(dialogView)
+                binding.btOkInfo.setOnClickListener {
+                    combatViewModel.putIsInfoCombatShowed()
+                    dialog.dismiss()
+                }
+                dialog.show()
+            }
+        }
     }
 
     private fun initMyPokemonInfo() {

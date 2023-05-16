@@ -5,10 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jdccmobile.pokecombat.data.pokeApi.pokemonInfoResponse.PokemonInfoResult
-import com.jdccmobile.pokecombat.data.preferences.VICTORIES
+import com.jdccmobile.pokecombat.data.preferences.PreferencesKeys
 import com.jdccmobile.pokecombat.domain.CombatTurnUC
+import com.jdccmobile.pokecombat.domain.GetIsInfoCombatShowedUC
 import com.jdccmobile.pokecombat.domain.GetPokemonInfoUC
 import com.jdccmobile.pokecombat.domain.GetVictoriesCountUC
+import com.jdccmobile.pokecombat.domain.PutIsInfoCombatShowedUC
 import com.jdccmobile.pokecombat.domain.PutVictoriesCountUC
 import com.jdccmobile.pokecombat.domain.TurnResultModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,12 +23,15 @@ class CombatViewModel @Inject constructor(
     private val getPokemonInfoUC: GetPokemonInfoUC,
     private val combatTurnUC: CombatTurnUC,
     private val putVictoriesCountUC: PutVictoriesCountUC,
-    private val getVictoriesCountUC: GetVictoriesCountUC
+    private val getVictoriesCountUC: GetVictoriesCountUC,
+    private val putIsInfoCombatShowedUC: PutIsInfoCombatShowedUC,
+    private val getIsInfoCombatShowedUC: GetIsInfoCombatShowedUC
 ) : ViewModel() {
 
     val myPokemonInfo = MutableLiveData<PokemonInfoResult>()
     val rivalPokemonInfo = MutableLiveData<PokemonInfoResult>()
     val victoriesCountDataStore = MutableLiveData<Int?>()
+    val isInfoCombatShowed = MutableLiveData<Boolean?>()
 
     private var myPokemonAttack = 0f
     private var myPokemonHP = 0f
@@ -94,15 +99,29 @@ class CombatViewModel @Inject constructor(
 
     fun putVictoriesCountDataStore(value: Int) {
         viewModelScope.launch {
-            putVictoriesCountUC(VICTORIES, value)
+            putVictoriesCountUC(PreferencesKeys.VICTORIES, value)
         }
     }
 
     fun getVictoriesCountDataStore(){
         viewModelScope.launch {
-            val victories = getVictoriesCountUC(VICTORIES)
+            val victories = getVictoriesCountUC(PreferencesKeys.VICTORIES)
             Log.i("JDJD", "victories VM $victories")
             victoriesCountDataStore.postValue(victories)
+        }
+    }
+
+    fun putIsInfoCombatShowed() {
+        viewModelScope.launch {
+            putIsInfoCombatShowedUC(PreferencesKeys.SHOW_COMBAT_INFO, true)
+        }
+    }
+
+    fun getIsInfoCombatShowed(){
+        viewModelScope.launch {
+            val wasShowed = getIsInfoCombatShowedUC(PreferencesKeys.SHOW_COMBAT_INFO)
+            Log.i("JDJD", "isShowed VM $wasShowed")
+            isInfoCombatShowed.postValue(wasShowed)
         }
     }
 

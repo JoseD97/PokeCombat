@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jdccmobile.pokecombat.data.preferences.VICTORIES
+import com.jdccmobile.pokecombat.data.preferences.PreferencesKeys
 import com.jdccmobile.pokecombat.domain.GetVictoriesCountUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -23,7 +23,7 @@ class MainViewModel @Inject constructor(
 
     fun getVictoriesCountDataStore(){
         viewModelScope.launch {
-            val victories = getVictoriesCountUC(VICTORIES)
+            val victories = getVictoriesCountUC(PreferencesKeys.VICTORIES)
             Log.i("JDJD", "victories VM $victories")
             victoriesCount.postValue(victories)
         }
