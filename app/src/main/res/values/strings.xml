@@ -33,4 +33,5 @@
     <string name="info_superattack">Carga un super ataque para hacer un ataque crítico a tu rival. Este ataque hará el doble de daño</string>
     <string name="ok">OK</string>
     <string name="super_attack">Super ataque</string>
+    <string name="speed">Velocidad</string>
 </resources>

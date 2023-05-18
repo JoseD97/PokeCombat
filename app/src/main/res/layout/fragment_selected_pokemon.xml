@@ -147,13 +147,13 @@
                 app:layout_constraintTop_toBottomOf="@id/tvSelectedPkmAttackStats" />
 
             <TextView
-                android:id="@+id/tvSelectedPkmType"
+                android:id="@+id/tvSelectedPkmSpeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/roboto_black"
-                android:text="@string/type"
+                android:text="@string/speed"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -161,13 +161,13 @@
                 app:layout_constraintTop_toBottomOf="@id/tvSelectedPkmHP" />
 
             <TextView
-                android:id="@+id/tvSelectedPkmTypeName"
+                android:id="@+id/tvSelectedPkmSpeedStats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="200dp"
                 android:fontFamily="@font/roboto_black"
-                tools:text="Planta"
+                tools:text="1"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -186,7 +186,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvSelectedPkmType" />
+                app:layout_constraintTop_toBottomOf="@id/tvSelectedPkmSpeed" />
 
             <TextView
                 android:id="@+id/tvSelectedPkmDifStat"
@@ -200,7 +200,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvSelectedPkmTypeName" />
+                app:layout_constraintTop_toBottomOf="@id/tvSelectedPkmSpeedStats" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btSelectPkm"

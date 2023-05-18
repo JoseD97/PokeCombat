@@ -1,9 +1,10 @@
 package com.jdccmobile.pokecombat.data.pokeApi.pokemonInfoResponse
 
-//todo poner serialized
+import com.google.gson.annotations.SerializedName
+
 data class PokemonInfoResult(
-    val name: String,
-    val id: Int,
-    val stats: List<Stat>,
-    val types: List<Type>
+    @SerializedName("name") val name: String,
+    @SerializedName("id") val id: Int,
+    @SerializedName("stats") val stats: List<Stat>,
+    @SerializedName("types") val types: List<Type>
 )
