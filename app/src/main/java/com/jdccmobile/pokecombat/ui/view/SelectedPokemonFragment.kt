@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.jdccmobile.pokecombat.R
 import com.jdccmobile.pokecombat.databinding.FragmentSelectedPokemonBinding
 import com.jdccmobile.pokecombat.ui.viewModel.SelectedPokemonViewModel
@@ -54,19 +53,20 @@ class SelectedPokemonFragment @Inject constructor() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) { // cuando este todo  cargado
         super.onViewCreated(view, savedInstanceState)
 
-        selectedPokemonViewModel.pokemonInfo.observe(requireActivity(), Observer { pokemonInfo ->
+        selectedPokemonViewModel.pokemonInfo.observe(requireActivity()) { pokemonInfo ->
             binding.tvSelectedPkmName.text = pokemonInfo.name.replaceFirstChar { it.uppercase() }
             binding.tvSelectedPkmId.text = String.format("#%03d", pokemonInfo.id)
             binding.tvSelectedPkmAttackStats.text = pokemonInfo.stats[1].base_stat.toString()
             binding.tvSelectedPkmHPStats.text = pokemonInfo.stats[0].base_stat.toString()
-            binding.tvSelectedPkmTypeName.text = pokemonInfo.types[0].type.name.replaceFirstChar { it.uppercase() }
-            val url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonInfo.id}.png"
+            binding.tvSelectedPkmSpeedStats.text = pokemonInfo.stats[5].base_stat.toString()
+            val url =
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonInfo.id}.png"
             Picasso.get().load(url).into(binding.ivSelectedPkmImage)
             binding.tvSelectedPkmDifStat.text = getPokemonDifficulty(
                 pokemonInfo.stats[1].base_stat,
                 pokemonInfo.stats[0].base_stat
             ).replaceFirstChar { it.uppercase() }
-        })
+        }
         initListeners()
     }
 
@@ -101,7 +101,7 @@ class SelectedPokemonFragment @Inject constructor() : Fragment() {
         const val POKEMON_ID = "pokemonId"
 
         //        private const val ARG_PARAM2 = "param2"
-        fun newInstance(param1: String) =
+        fun newInstance() =
             SelectedPokemonFragment().apply {
                 arguments = Bundle().apply {
                     putInt(POKEMON_ID, pokemonId!!)

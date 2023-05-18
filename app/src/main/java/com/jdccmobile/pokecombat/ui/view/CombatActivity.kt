@@ -33,6 +33,7 @@ class CombatActivity @Inject constructor() : AppCompatActivity() {
     private var rivalPokemonName = ""
     private var victoriesCountDataStore = 0
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCombatBinding.inflate(layoutInflater)
@@ -104,7 +105,12 @@ class CombatActivity @Inject constructor() : AppCompatActivity() {
             Picasso.get().load(url).into(binding.ivRivalPokemon)
             binding.ivRivalPokemon.animate().alpha(1f).duration = 1000
 
+            binding.pbLoadingRivalImage.visibility = View.GONE
+            binding.tvMyMove.visibility = View.VISIBLE
+            binding.tvRivalMove.visibility = View.VISIBLE
         }
+
+
     }
 
     private fun initListeners() {

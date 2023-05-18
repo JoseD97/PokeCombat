@@ -20,8 +20,6 @@ class PokedexActivity @Inject constructor() : AppCompatActivity() {
     private val pokedexViewModel: PokedexViewModel by viewModels()
     private lateinit var binding: ActivityPokedexBinding
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPokedexBinding.inflate(layoutInflater)
@@ -38,12 +36,13 @@ class PokedexActivity @Inject constructor() : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
-        // TODO AÑADIR CIRCULO DE CARGA MIENTRAS SE CARGAN LOS POKEMONS
         binding.rvPokemon.layoutManager = GridLayoutManager(this, 2)
         pokedexViewModel.pokemonsList.observe(this) { pokemon ->
             binding.rvPokemon.adapter = PokedexAdapter(pokemon) { pokemonId ->
                 onItemSelected(pokemonId)
             }
+            binding.pbLoadingPokedex.visibility = View.GONE
+            binding.rvPokemon.visibility = View.VISIBLE
         }
     }
 

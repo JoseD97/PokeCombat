@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/yellow_pokemon</item>
         <item name="android:statusBarColor">@color/yellow_pokemon</item>
         <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:indeterminateTint">@color/yellow_pokemon</item>
     </style>
 
     <style name="Theme.PokeCombat" parent="Base.Theme.PokeCombat" />

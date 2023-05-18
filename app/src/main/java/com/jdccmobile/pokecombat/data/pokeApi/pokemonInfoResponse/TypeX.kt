@@ -1,6 +1,8 @@
 package com.jdccmobile.pokecombat.data.pokeApi.pokemonInfoResponse
 
+import com.google.gson.annotations.SerializedName
+
 data class TypeX(
-    val name: String,
-    val url: String
+    @SerializedName("name") val name: String,
+    @SerializedName("url") val url: String
 )
