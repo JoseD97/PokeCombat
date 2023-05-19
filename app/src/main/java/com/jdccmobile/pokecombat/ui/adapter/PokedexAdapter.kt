@@ -42,19 +42,3 @@ class PokedexAdapter(private val pokemon: List<PokemonList>, private val onClick
         }
     }
 }
-
-
-
-
-
-
-//itemView.setOnClickListener {
-//                Log.i("JDJD", "PULSADO $position")
-//                val context = itemView.context
-//                val fragmentManager = (context as AppCompatActivity).supportFragmentManager
-//                val fragmentTransaction = fragmentManager.beginTransaction()
-//                val selectPokemonFragment = SelectPokemonFragment()
-//                fragmentTransaction.add(R.id.frSelectPokemonContainer, selectPokemonFragment)
-//                fragmentTransaction.addToBackStack(null)
-//                fragmentTransaction.commit()
-//            }

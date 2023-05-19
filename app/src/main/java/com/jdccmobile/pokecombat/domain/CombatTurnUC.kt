@@ -1,6 +1,5 @@
 package com.jdccmobile.pokecombat.domain
 
-import android.util.Log
 import javax.inject.Inject
 
 class CombatTurnUC @Inject constructor() {
@@ -41,17 +40,12 @@ class CombatTurnUC @Inject constructor() {
             userDefeated = turnIaResult.second
         }
         else if(iaMove == 2 && !iaDefeated) { isNewRivalAttackLoaded = true }
-
-        Log.i("JDJD", "isNewMyAttackLoaded $isNewMyAttackLoaded")
-        Log.i("JDJD", "isNewRivalAttackLoaded $isNewRivalAttackLoaded")
-
         return TurnResultModel(userNewHP, userDefeated, isNewMyAttackLoaded, iaNewHP, iaDefeated, isNewRivalAttackLoaded)
     }
 
     private fun userAttacks(userAttack: Float, iaHP: Float, iaMove: Int): Pair<Float, Boolean> {
         var iaNewHP: Float
         var iaNewDefeated = false
-        Log.i("JDJD", "userAttack $userAttack")
         iaNewHP = when (iaMove) {
             0 -> iaHP - userAttack / 2
             else -> iaHP - userAttack
@@ -66,7 +60,6 @@ class CombatTurnUC @Inject constructor() {
     private fun iaAttacks(iaAttack: Float, userHP: Float, userMove: Int): Pair<Float, Boolean> {
         var userNewHP: Float
         var userNewDefeated = false
-        Log.i("JDJD", "iaAttack $iaAttack")
         userNewHP = when (userMove) {
             0 -> userHP - iaAttack /  2
             else -> userHP - iaAttack

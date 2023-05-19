@@ -2,7 +2,6 @@ package com.jdccmobile.pokecombat.ui.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,18 +26,13 @@ class SelectedPokemonFragment @Inject constructor() : Fragment() {
     private val selectedPokemonViewModel: SelectedPokemonViewModel by viewModels()
 
     private var pokemonId: Int? = null
-//    private var param2: String? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             pokemonId = it.getInt(POKEMON_ID)
-//            param2 = it.getString(ARG_PARAM2)
         }
-        Log.i("JDJD", "pokemonid : $pokemonId")
         if (pokemonId != null) selectedPokemonViewModel.getPokemonInfo(pokemonId!!)
-
     }
 
     override fun onCreateView(
@@ -50,7 +44,7 @@ class SelectedPokemonFragment @Inject constructor() : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) { // cuando este todo  cargado
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         selectedPokemonViewModel.pokemonInfo.observe(requireActivity()) { pokemonInfo ->
@@ -78,7 +72,6 @@ class SelectedPokemonFragment @Inject constructor() : Fragment() {
             parentFragmentManager.popBackStack()
         }
         binding.btSelectPkm.setOnClickListener {
-//            requireActivity().findViewById<FragmentContainerView>(R.id.frSelectedPokemonContainer).visibility = View.GONE
             val intent = Intent(requireActivity(), CombatActivity::class.java)
             intent.putExtra(MY_POKEMON_ID, pokemonId)
             startActivity(intent)
@@ -100,12 +93,10 @@ class SelectedPokemonFragment @Inject constructor() : Fragment() {
     companion object {
         const val POKEMON_ID = "pokemonId"
 
-        //        private const val ARG_PARAM2 = "param2"
         fun newInstance() =
             SelectedPokemonFragment().apply {
                 arguments = Bundle().apply {
                     putInt(POKEMON_ID, pokemonId!!)
-//                    putString(ARG_PARAM2, param2)
                 }
             }
     }

@@ -1,6 +1,5 @@
 package com.jdccmobile.pokecombat.ui.viewModel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -21,10 +20,9 @@ class MainViewModel @Inject constructor(
         getVictoriesCountDataStore()
     }
 
-    fun getVictoriesCountDataStore(){
+    private fun getVictoriesCountDataStore(){
         viewModelScope.launch {
             val victories = getVictoriesCountUC(PreferencesKeys.VICTORIES)
-            Log.i("JDJD", "victories VM $victories")
             victoriesCount.postValue(victories)
         }
     }

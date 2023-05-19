@@ -1,6 +1,5 @@
 package com.jdccmobile.pokecombat.ui.viewModel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -25,8 +24,7 @@ class PokedexViewModel @Inject constructor(
     private fun getAllPokemons(){
         viewModelScope.launch {
             val result: List<PokemonList> = getAllPokemonsUC()
-            Log.i("JDJD", "result vw $result")
-            if(!result.isNullOrEmpty()) pokemonsList.postValue(result)
+            if(result.isNotEmpty()) pokemonsList.postValue(result)
         }
     }
 }

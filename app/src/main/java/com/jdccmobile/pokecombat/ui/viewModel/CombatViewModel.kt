@@ -1,6 +1,5 @@
 package com.jdccmobile.pokecombat.ui.viewModel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -51,7 +50,7 @@ class CombatViewModel @Inject constructor(
     private fun getMyPokemonInfo(myPokemonId: Int) {
         viewModelScope.launch {
             val result: PokemonInfoResult = getPokemonInfoUC(myPokemonId)
-            if (result != null) myPokemonInfo.postValue(result)
+            myPokemonInfo.postValue(result)
             myPokemonAttack = result.stats[1].base_stat.toFloat()
             myPokemonHP = result.stats[0].base_stat.toFloat()
         }
@@ -61,7 +60,7 @@ class CombatViewModel @Inject constructor(
         viewModelScope.launch {
             val result: PokemonInfoResult =
                 getPokemonInfoUC(Random.nextInt(1, 1011))  // 1010 available pokemons in pokeapi
-            if (result != null) rivalPokemonInfo.postValue(result)
+            rivalPokemonInfo.postValue(result)
             rivalPokemonAttack = result.stats[1].base_stat.toFloat()
             rivalPokemonHP = result.stats[0].base_stat.toFloat()
         }
@@ -106,7 +105,6 @@ class CombatViewModel @Inject constructor(
     fun getVictoriesCountDataStore(){
         viewModelScope.launch {
             val victories = getVictoriesCountUC(PreferencesKeys.VICTORIES)
-            Log.i("JDJD", "victories VM $victories")
             victoriesCountDataStore.postValue(victories)
         }
     }
@@ -120,7 +118,6 @@ class CombatViewModel @Inject constructor(
     fun getIsInfoCombatShowed(){
         viewModelScope.launch {
             val wasShowed = getIsInfoCombatShowedUC(PreferencesKeys.SHOW_COMBAT_INFO)
-            Log.i("JDJD", "isShowed VM $wasShowed")
             isInfoCombatShowed.postValue(wasShowed)
         }
     }
