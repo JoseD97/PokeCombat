@@ -2,7 +2,6 @@ package com.jdccmobile.pokecombat.ui.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -61,7 +60,6 @@ class CombatActivity @Inject constructor() : AppCompatActivity() {
         combatViewModel.victoriesCountDataStore.observe(this){ victories ->
             if(victories != null) victoriesCountDataStore = victories
             else victoriesCountDataStore = 99
-            Log.i("JDJD", "victoriesCountDataStore $victoriesCountDataStore")
         }
     }
 
@@ -158,12 +156,12 @@ class CombatActivity @Inject constructor() : AppCompatActivity() {
         var userMoveDescription = ""
         if (userMove == 0) userMoveDescription = getString(R.string.dodged)
         if (userMove == 1) userMoveDescription = getString(R.string.attacked)
-        if(userMove == 2) userMoveDescription = "CARGO"
+        if(userMove == 2) userMoveDescription = getString(R.string.loaded)
         val userPokemonName = binding.tvMyPokemonName.text
 
         var iaMoveDescription =
             if (iaMove == 1) getString(R.string.attacked) else getString(R.string.dodged)
-        if(iaMove == 2) iaMoveDescription = "CARGO"
+        if(iaMove == 2) iaMoveDescription = getString(R.string.loaded)
         val iaPokemonName = binding.tvRivalPokemonName.text
 
         val userMoveText = "$userPokemonName $userMoveDescription ${getString(R.string.rival_lives_left)} " +
@@ -199,10 +197,9 @@ class CombatActivity @Inject constructor() : AppCompatActivity() {
 
         bindingDialog.btEndDialog.setOnClickListener {
             if (userDefeated) {
-                Log.i("JDJD", "victoriesCountDataStore $victoriesCountDataStore")
-                Log.i("JDJD", "victoriesCount $victoriesCount")
                 if(victoriesCount > victoriesCountDataStore) combatViewModel.putVictoriesCountDataStore(victoriesCount)
                 val intent = Intent(this, PokedexActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 startActivity(intent)
                 finish()
             } else {

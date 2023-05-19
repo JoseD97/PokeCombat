@@ -1,6 +1,5 @@
 package com.jdccmobile.pokecombat.ui.viewModel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -21,8 +20,7 @@ class SelectedPokemonViewModel @Inject constructor(
     fun getPokemonInfo(pokemonId : Int){
         viewModelScope.launch {
             val result: PokemonInfoResult = getPokemonInfoUC(pokemonId)
-            Log.i("TAG", "RESULTADO VIEWMODEL $result")
-            if(result != null) pokemonInfo.postValue(result)
+            pokemonInfo.postValue(result)
         }
     }
 

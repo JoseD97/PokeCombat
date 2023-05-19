@@ -31,8 +31,6 @@ class PokedexActivity @Inject constructor() : AppCompatActivity() {
 
     private fun initActivity() {
         initRecyclerView()
-        // TODO OCULTAR VISTA CUANDO SE VUELVE CON EL BACK ON CLICK LISTENER DESDE EL COMBAT
-        binding.frSelectedPokemonContainer.visibility = View.GONE
     }
 
     private fun initRecyclerView() {
@@ -47,13 +45,11 @@ class PokedexActivity @Inject constructor() : AppCompatActivity() {
     }
 
     private fun onItemSelected(pokemonId: Int){
-        // todo estoy creando otro fragment y por eso cuando le doy a atras me sale el fragment vacio en vez de irse?
         val bundle = bundleOf(POKEMON_ID to pokemonId)
         val selectedPokemonFragment = SelectedPokemonFragment()
         selectedPokemonFragment.arguments = bundle
         supportFragmentManager.beginTransaction()
             .add(R.id.frSelectedPokemonContainer, selectedPokemonFragment)
-            .addToBackStack(null)
             .commit()
         binding.frSelectedPokemonContainer.visibility = View.VISIBLE
     }
