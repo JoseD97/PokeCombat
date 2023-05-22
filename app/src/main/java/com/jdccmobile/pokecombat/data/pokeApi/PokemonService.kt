@@ -11,9 +11,9 @@ class PokemonService @Inject constructor(
     private val apiClient: PokemonApiClient
 ) {
 
-    suspend fun getAllPokemons(): List<PokemonList> {
+    suspend fun getAllPokemons(offset : Int): List<PokemonList> {
         return withContext(Dispatchers.IO) {
-            val response = apiClient.getAllPokemons()
+            val response = apiClient.getAllPokemons(offset)
             val body = response.body()
             Log.d("JDJD", "BODY $body")
             body?.results ?: emptyList()

@@ -12,19 +12,21 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PokedexViewModel @Inject constructor(
-    private val getAllPokemonsUC: GetAllPokemonsUC
+    private val getAllPokemonsUC: GetAllPokemonsUC,
 ) : ViewModel(){
 
     val pokemonsList = MutableLiveData<List<PokemonList>>()
 
-    fun initViewModel() {
-        getAllPokemons()
-    }
 
-    private fun getAllPokemons(){
+    fun getAllPokemons(offset : Int){
         viewModelScope.launch {
-            val result: List<PokemonList> = getAllPokemonsUC()
-            if(result.isNotEmpty()) pokemonsList.postValue(result)
+            val result: List<PokemonList> = getAllPokemonsUC(offset)
+            if(result.isNotEmpty()) {
+                val currentList = pokemonsList.value.orEmpty().toMutableList()
+                currentList.addAll(result)
+                pokemonsList.postValue(currentList)
+//                pokemonsList.postValue(result)
+            }
         }
     }
 }

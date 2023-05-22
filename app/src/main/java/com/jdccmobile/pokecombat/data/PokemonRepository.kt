@@ -13,8 +13,8 @@ class PokemonRepository @Inject constructor(
 ) {
 
     // PokeApi
-    suspend fun getAllPokemons(): List<PokemonList> {
-        return pokemonService.getAllPokemons()
+    suspend fun getAllPokemons(offset : Int): List<PokemonList> {
+        return pokemonService.getAllPokemons(offset)
     }
 
     suspend fun getPokemonInfo(pokemonId : Int): PokemonInfoResult {
