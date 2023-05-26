@@ -1,8 +1,10 @@
 package com.jdccmobile.pokecombat.data.api.response
 
+import com.google.gson.annotations.SerializedName
+
 data class PokedexResult(
-    val count: Int,
-    val next: String,
-    val previous: Any,
-    val results: List<PokemonList>
+    @SerializedName("count") val count: Int,
+    @SerializedName("next") val next: String,
+    @SerializedName("previous") val previous: Any,
+    @SerializedName("results") val results: List<PokemonList>
 )

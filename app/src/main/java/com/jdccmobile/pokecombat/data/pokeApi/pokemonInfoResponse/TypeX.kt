@@ -1,8 +1,8 @@
-package com.jdccmobile.pokecombat.data.api.response
+package com.jdccmobile.pokecombat.data.pokeApi.pokemonInfoResponse
 
 import com.google.gson.annotations.SerializedName
 
-data class PokemonList(
+data class TypeX(
     @SerializedName("name") val name: String,
     @SerializedName("url") val url: String
 )

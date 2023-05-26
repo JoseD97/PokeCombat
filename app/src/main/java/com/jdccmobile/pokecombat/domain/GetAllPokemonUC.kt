@@ -8,9 +8,9 @@ import javax.inject.Inject
 class GetAllPokemonsUC @Inject constructor(
     private val pokemonRepository: PokemonRepository
 ) {
-    suspend operator fun invoke(): List<PokemonList> {
+    suspend operator fun invoke(offset : Int): List<PokemonList> {
         Log.w("JDJD", "entro UC")
-        return pokemonRepository.getAllPokemons()
+        return pokemonRepository.getAllPokemons(offset)
     }
 
 }

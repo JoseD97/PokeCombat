@@ -71,4 +71,6 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     // Picaso
     implementation "com.squareup.picasso:picasso:2.71828"
+    // DataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
 }
