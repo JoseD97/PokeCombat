@@ -12,7 +12,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="VICTORIA"
+        android:text="@string/win"
         android:fontFamily="@font/roboto_black"
         android:textColor="@color/yellow_pokemon"
         android:textSize="25sp" />
@@ -21,7 +21,7 @@
         android:id="@+id/tvCombatEndSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Victorias seguidas"
+        android:text="@string/consecutive_victories"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,6 @@
         android:id="@+id/tvCombatEndVictories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="9"
         android:fontFamily="@font/roboto_black"
         android:textSize="25sp"
         android:layout_marginTop="8dp"
@@ -49,7 +48,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_black"
-        android:text="CONTINUAR"
+        android:text="@string/continue_button"
         app:layout_constraintTop_toBottomOf="@+id/tvCombatEndVictories" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

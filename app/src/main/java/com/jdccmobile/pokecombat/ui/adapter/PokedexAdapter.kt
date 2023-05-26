@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jdccmobile.pokecombat.R
-import com.jdccmobile.pokecombat.data.pokeApi.pokedexResponse.PokemonList
+import com.jdccmobile.pokecombat.data.api.response.PokemonList
 import com.jdccmobile.pokecombat.databinding.ItemPokemonBinding
 import com.squareup.picasso.Picasso
 

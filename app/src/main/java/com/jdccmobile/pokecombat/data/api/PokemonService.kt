@@ -1,7 +1,7 @@
 package com.jdccmobile.pokecombat.data.pokeApi
 
 import android.util.Log
-import com.jdccmobile.pokecombat.data.pokeApi.pokedexResponse.PokemonList
+import com.jdccmobile.pokecombat.data.api.response.PokemonList
 import com.jdccmobile.pokecombat.data.pokeApi.pokemonInfoResponse.PokemonInfoResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

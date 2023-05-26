@@ -1,8 +1,8 @@
 package com.jdccmobile.pokecombat.data
 
 import androidx.datastore.preferences.core.Preferences
+import com.jdccmobile.pokecombat.data.api.response.PokemonList
 import com.jdccmobile.pokecombat.data.pokeApi.PokemonService
-import com.jdccmobile.pokecombat.data.pokeApi.pokedexResponse.PokemonList
 import com.jdccmobile.pokecombat.data.pokeApi.pokemonInfoResponse.PokemonInfoResult
 import com.jdccmobile.pokecombat.data.preferences.PreferencesDataStore
 import javax.inject.Inject
