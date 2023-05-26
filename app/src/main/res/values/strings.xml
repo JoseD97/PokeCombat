@@ -35,4 +35,6 @@
     <string name="ok">OK</string>
     <string name="super_attack">Super ataque</string>
     <string name="speed">Velocidad</string>
+    <string name="consecutive_victories">Victorias seguidas</string>
+    <string name="continue_button">CONTINUAR</string>
 </resources>
