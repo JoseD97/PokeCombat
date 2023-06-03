@@ -9,11 +9,11 @@ Esta app te permite escoger el pokémon que quieras de la Pokédex para luchar c
 El objetivo es acumular el mayor número de victorias posibles. En los combates, cada pokémon tiene sus propios stats de ataque y vida y
 se puede atacar, esquivar o cargar un ataque más fuerte.
 
-Tecnologías:
-☑ Kotlin + vistas XML
-☑ Clean Architecture + MVVM
-☑ GitFlow
-☑ ViewBinding
-☑ Dagger Hilt
-☑ Retrofit (PokeAPI)
-☑ DataStore Preferences
+## Tecnologías
+<p>☑ Kotlin + vistas XML</p>
+<p>☑ Clean Architecture + MVVM</p>
+<p>☑ GitFlow</p>
+<p>☑ ViewBinding</p>
+<p>☑ Dagger Hilt</p>
+<p>☑ Retrofit (PokeAPI)</p>
+<p>☑ DataStore Preferences</p>
