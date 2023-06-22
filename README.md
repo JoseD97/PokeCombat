@@ -9,6 +9,9 @@ Esta app te permite escoger el pokémon que quieras de la Pokédex para luchar c
 El objetivo es acumular el mayor número de victorias posibles. En los combates, cada pokémon tiene sus propios stats de ataque y vida y
 se puede atacar, esquivar o cargar un ataque más fuerte.
 
+Para esta app creé una guía de los pasos realizados para que cualquier persona que esté aprendiendo la pueda consultar y entender mejor el desarrollo de la app.
+Accede a la guia [aqui.](https://github.com/jdccMobile/PokeCombat/blob/master/PokeCombat.pdf)
+
 ## Tecnologías
 <p>☑ Kotlin + vistas XML</p>
 <p>☑ Clean Architecture + MVVM</p>
